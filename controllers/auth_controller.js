@@ -90,7 +90,7 @@ const login_post = (req, res) => {
               res.status(200).send('/');
             }
           } else {
-            res.status(403).send('Invalid usernampasword.');
+            res.status(403).send('Invalid sernampasword.');
           }
         });
   } else {
