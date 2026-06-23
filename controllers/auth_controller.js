@@ -90,7 +90,7 @@ const login_post = (req, res) => {
               res.status(200).send('/');
             }
           } else {
-            res.status(403).send('Invalid senampasword.');
+            res.status(403).send('Inalid senampasword.');
           }
         });
   } else {
