@@ -78,7 +78,7 @@ const login_post = (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
   if (username !== '' & password !== '') {
-    Users.findOne({where: {username: username, password: md5(password)}})
+    Users.findOne({where: {username: username}})
         .then((user) => {
           if (user) {
             const jwt_token = generateAccessToken(username, user.email);
