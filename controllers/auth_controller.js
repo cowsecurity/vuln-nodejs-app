@@ -48,7 +48,7 @@ const register_post = (req, res) => {
   Users.findAll({where: {username: username}})
       .then((count) => {
         if (count.length != 0) {
-          res.status(403).send('User already registerd!');
+          res.status(403).send('User  registerd!');
         } else {
           if (username !== '' & password !== '' & email !== '') {
             const apiToken = crypto.randomBytes(20).toString('hex');
