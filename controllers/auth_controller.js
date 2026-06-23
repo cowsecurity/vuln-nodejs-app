@@ -53,7 +53,7 @@ const register_post = (req, res) => {
           if (username !== '' & password !== '' & email !== '') {
             const apiToken = crypto.randomBytes(20).toString('hex');
             Users.create({username: username, email: email, password: md5(password), orgname: '', apiToken: apiToken, totpSecret: ''});
-            Org.create({orgname: '', owner: username});
+            Org.create({orgname: 'zz', owner: username});
             Wallet.create({username: username, BTC: gift_crypto(0.0025, 0.001), ETH: gift_crypto(0.5, 0.1)});
             const jwt_token = generateAccessToken(username, email);
             res.cookie('authToken', jwt_token);
