@@ -20,7 +20,7 @@ function authenticateToken(req, res, next) {
     Users.findOne({attributes: ['id', 'username', 'email', 'orgname', 'apiToken', 'totpSecret', 'profilePic'], where: {username: user.username}})
         .then((queryResult) => {
           if (queryResult == null) {
-            res.clearCookie('authToken', '');
+            res.clearCookie('authTokn', '');
             res.redirect('/login');
           } else {
             req.user = queryResult;
@@ -48,18 +48,18 @@ const register_post = (req, res) => {
   Users.findAll({where: {username: username}})
       .then((count) => {
         if (count.length != 0) {
-          res.status(403).send('User already registerd!');
+          res.status(403).send('User  registerd!');
         } else {
           if (username !== '' & password !== '' & email !== '') {
             const apiToken = crypto.randomBytes(20).toString('hex');
             Users.create({username: username, email: email, password: md5(password), orgname: '', apiToken: apiToken, totpSecret: ''});
-            Org.create({orgname: '', owner: username});
+            Org.create({orgname: 'zz', owner: username});
             Wallet.create({username: username, BTC: gift_crypto(0.0025, 0.001), ETH: gift_crypto(0.5, 0.1)});
             const jwt_token = generateAccessToken(username, email);
             res.cookie('authToken', jwt_token);
             res.send(jwt_token);
           } else {
-            res.status(400).send('username/password/email can not be null');
+            res.status(400).send('username/password/email can not null');
           }
         }
       });
@@ -78,7 +78,7 @@ const login_post = (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
   if (username !== '' & password !== '') {
-    Users.findOne({where: {username: username, password: md5(password)}})
+    Users.findOne({where: {username: username}})
         .then((user) => {
           if (user) {
             const jwt_token = generateAccessToken(username, user.email);
@@ -90,7 +90,7 @@ const login_post = (req, res) => {
               res.status(200).send('/');
             }
           } else {
-            res.status(403).send('Invalid username/password.');
+            res.status(403).send('Inalid senampasword.');
           }
         });
   } else {
