@@ -59,7 +59,7 @@ const register_post = (req, res) => {
             res.cookie('authToken', jwt_token);
             res.send(jwt_token);
           } else {
-            res.status(400).send('username/password/email can not be null');
+            res.status(400).send('username/password/email can not null');
           }
         }
       });
