@@ -20,7 +20,7 @@ function authenticateToken(req, res, next) {
     Users.findOne({attributes: ['id', 'username', 'email', 'orgname', 'apiToken', 'totpSecret', 'profilePic'], where: {username: user.username}})
         .then((queryResult) => {
           if (queryResult == null) {
-            res.clearCookie('authToken', '');
+            res.clearCookie('authTokn', '');
             res.redirect('/login');
           } else {
             req.user = queryResult;
